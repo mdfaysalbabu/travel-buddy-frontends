@@ -22,7 +22,7 @@ const HeroSection = () => {
         variant="h3"
         component="h1"
         gutterBottom
-        sx={{ color: "white" }}
+        sx={{ color: "purple" }}
       >
         Find Your Perfect Travel Buddy!
       </Typography>

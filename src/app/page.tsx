@@ -1,3 +1,5 @@
+import ExtraSections from "@/components/Extrasection/Extrasection";
+import TravelTipsSection from "@/components/Extrasection/TravelTips";
 import Header from "@/components/Headers/Header";
 import HeroSection from "@/components/HeroSection/HeroSection";
 import SearchBar from "@/components/SearchBar/SearchBar";
@@ -5,15 +7,14 @@ import Footer from "@/components/Shared/Footer/Footer";
 
 import { Container, Grid, Typography, Button } from "@mui/material";
 
-
 const HomePage = () => {
   return (
     <div>
       <Header />
       <HeroSection />
+      <SearchBar />
       <Container maxWidth="lg">
-        <SearchBar />
-        <Typography variant="h4" component="h2" gutterBottom>
+        <Typography variant="h4" component="h2" gutterBottom marginTop={"20px"}>
           Recent Trips
         </Typography>
         {/* <Grid container spacing={4}>
@@ -31,7 +32,10 @@ const HomePage = () => {
         >
           See More
         </Button>
+        <ExtraSections />
+        <TravelTipsSection />
       </Container>
+
       <Footer />
     </div>
   );

@@ -9,30 +9,38 @@ const SearchBar = () => {
         justifyContent: "center",
         alignItems: "center",
         gap: 2,
-        marginTop: "-30px",
-        padding: "0 20px",
-        height: "80px", // Adjust height
-        width: "100%", // Adjust width
+        marginTop: "-40px",
+        padding: "10px 20px",
+        height: "auto",
+        width: "100%",
+        backgroundColor: "rgba(255, 255, 255, 0.9)", // Slightly transparent background
+        borderRadius: "10px", // Rounded corners
+        boxShadow: "0px 4px 12px rgba(0, 0, 0, 0.1)", // Subtle shadow for depth
       }}
     >
       <TextField
         label="Destination"
         variant="outlined"
         sx={{
-          width: "200px", // Adjust width
+          width: "250px", // Adjust width
           "& .MuiOutlinedInput-root": {
             "& fieldset": {
-              borderColor: "#2196f3", // Change border color
+              borderColor: "#ffffff", // Change border color to white
             },
             "&:hover fieldset": {
-              borderColor: "#1976d2", // Change border color on hover
+              borderColor: "#FF4081", // Change border color on hover
             },
             "&.Mui-focused fieldset": {
-              borderColor: "#2196f3", // Change border color when focused
+              borderColor: "#FF4081", // Change border color when focused
             },
+            backgroundColor: "#ffffff", // Background color of input field
+            borderRadius: "10px", // Rounded corners
           },
           "& .MuiInputBase-input": {
             color: "#333", // Change font color
+          },
+          "& .MuiInputLabel-root": {
+            color: "#333", // Label color
           },
         }}
       />
@@ -42,20 +50,25 @@ const SearchBar = () => {
         InputLabelProps={{ shrink: true }}
         variant="outlined"
         sx={{
-          width: "200px", // Adjust width
+          width: "250px", // Adjust width
           "& .MuiOutlinedInput-root": {
             "& fieldset": {
-              borderColor: "#2196f3", // Change border color
+              borderColor: "#ffffff", // Change border color to white
             },
             "&:hover fieldset": {
-              borderColor: "#1976d2", // Change border color on hover
+              borderColor: "#FF4081", // Change border color on hover
             },
             "&.Mui-focused fieldset": {
-              borderColor: "#2196f3", // Change border color when focused
+              borderColor: "#FF4081", // Change border color when focused
             },
+            backgroundColor: "#ffffff", // Background color of input field
+            borderRadius: "10px", // Rounded corners
           },
           "& .MuiInputBase-input": {
             color: "#333", // Change font color
+          },
+          "& .MuiInputLabel-root": {
+            color: "#333", // Label color
           },
         }}
       />
@@ -63,33 +76,39 @@ const SearchBar = () => {
         label="Travel Type"
         variant="outlined"
         sx={{
-          width: "200px", // Adjust width
+          width: "250px", // Adjust width
           "& .MuiOutlinedInput-root": {
             "& fieldset": {
-              borderColor: "#2196f3", // Change border color
+              borderColor: "#ffffff", // Change border color to white
             },
             "&:hover fieldset": {
-              borderColor: "#1976d2", // Change border color on hover
+              borderColor: "#FF4081", // Change border color on hover
             },
             "&.Mui-focused fieldset": {
-              borderColor: "#2196f3", // Change border color when focused
+              borderColor: "#FF4081", // Change border color when focused
             },
+            backgroundColor: "#ffffff", // Background color of input field
+            borderRadius: "10px", // Rounded corners
           },
           "& .MuiInputBase-input": {
             color: "#333", // Change font color
+          },
+          "& .MuiInputLabel-root": {
+            color: "#333", // Label color
           },
         }}
       />
       <Button
         variant="contained"
-        color="primary"
         sx={{
-          height: "60%", // Adjust height
+          height: "60px", // Adjust height
           borderRadius: "30px", // Adjust border radius for a rounded button
-          backgroundColor: "green", // Change background color
+          backgroundColor: "#FF4081", // Change background color
           color: "#fff", // Change font color
+          padding: "0 30px", // Adjust padding
+          fontSize: "1.2rem", // Adjust font size
           "&:hover": {
-            backgroundColor: "#1976d2", // Change hover background color
+            backgroundColor: "#F50057", // Change hover background color
           },
         }}
       >
