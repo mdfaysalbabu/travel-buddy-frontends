@@ -1,5 +1,4 @@
-"use client";
-
+'use client'
 import React, { useState } from "react";
 import {
   AppBar,
@@ -15,43 +14,46 @@ import {
   Container,
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
+import Image from "next/image";
 import Link from "next/link";
 import { useTheme, useMediaQuery } from "@mui/material";
+import logo from "@/assets/logo.png";
 
 const Header = () => {
   const [drawerOpen, setDrawerOpen] = useState(false);
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
 
-  const toggleDrawer =
-    (open: boolean) => (event: React.KeyboardEvent | React.MouseEvent) => {
-      if (
-        event.type === "keydown" &&
-        (event as React.KeyboardEvent).key === "Tab"
-      ) {
-        return;
-      }
-      setDrawerOpen(open);
-    };
+  const toggleDrawer = (open: boolean) => (
+    event: React.KeyboardEvent | React.MouseEvent
+  ) => {
+    if (
+      event.type === "keydown" &&
+      (event as React.KeyboardEvent).key === "Tab"
+    ) {
+      return;
+    }
+    setDrawerOpen(open);
+  };
 
   const drawer = (
     <Box
-      sx={{ width: 250 }}
+      sx={{ width: 250, bgcolor: "#f9f9f9" }}
       role="presentation"
       onClick={toggleDrawer(false)}
       onKeyDown={toggleDrawer(false)}
     >
       <List>
-        <ListItem button component="a" href="/">
+        <ListItem component="a" href="/" button>
           <ListItemText primary="Home" />
         </ListItem>
-        <ListItem button component="a" href="/about">
+        <ListItem component="a" href="/about" button>
           <ListItemText primary="About Us" />
         </ListItem>
-        <ListItem button component="a" href="/login">
+        <ListItem component="a" href="/login" button>
           <ListItemText primary="Login" />
         </ListItem>
-        <ListItem button component="a" href="/register">
+        <ListItem component="a" href="/register" button>
           <ListItemText primary="Register" />
         </ListItem>
       </List>
@@ -62,12 +64,21 @@ const Header = () => {
     <AppBar
       position="static"
       sx={{
-        background: "linear-gradient(90deg, #00CED1, #20B2AA)",
+        bgcolor: "teal",
+        borderBottom: "1px solid #333",
         boxShadow: "none",
       }}
     >
       <Container>
         <Toolbar disableGutters>
+          <IconButton
+            edge="start"
+            color="inherit"
+            aria-label="logo"
+            sx={{ mr: 2 }}
+          >
+            <Image src={logo} alt="Travel Buddy Logo" width={40} height={40} />
+          </IconButton>
           <Typography
             variant="h6"
             component="div"
@@ -85,7 +96,7 @@ const Header = () => {
           {isMobile ? (
             <>
               <IconButton
-                edge="start"
+                edge="end"
                 color="inherit"
                 aria-label="menu"
                 onClick={toggleDrawer(true)}
@@ -104,36 +115,52 @@ const Header = () => {
             <>
               <Link href="/" passHref>
                 <Button
-                  variant="contained"
-                  color="secondary"
-                  sx={{ marginRight: 2, borderRadius: 20 }}
+                  variant="text"
+                  sx={{
+                    color: "#fff",
+                    "&:hover": {
+                      color: "#ddd",
+                    },
+                  }}
                 >
                   Home
                 </Button>
               </Link>
               <Link href="/about" passHref>
                 <Button
-                  variant="contained"
-                  color="secondary"
-                  sx={{ marginRight: 2, borderRadius: 20 }}
+                  variant="text"
+                  sx={{
+                    color: "#fff",
+                    "&:hover": {
+                      color: "#ddd",
+                    },
+                  }}
                 >
                   About Us
                 </Button>
               </Link>
               <Link href="/login" passHref>
                 <Button
-                  variant="contained"
-                  color="secondary"
-                  sx={{ marginRight: 2, borderRadius: 20 }}
+                  variant="text"
+                  sx={{
+                    color: "#fff",
+                    "&:hover": {
+                      color: "#ddd",
+                    },
+                  }}
                 >
                   Login
                 </Button>
               </Link>
               <Link href="/register" passHref>
                 <Button
-                  variant="contained"
-                  color="secondary"
-                  sx={{ borderRadius: 20 }}
+                  variant="text"
+                  sx={{
+                    color: "#fff",
+                    "&:hover": {
+                      color: "#ddd",
+                    },
+                  }}
                 >
                   Register
                 </Button>

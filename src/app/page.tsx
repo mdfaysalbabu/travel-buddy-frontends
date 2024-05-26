@@ -1,9 +1,16 @@
 import ExtraSections from "@/components/Extrasection/Extrasection";
 import TravelTipsSection from "@/components/Extrasection/TravelTips";
-import Header from "@/components/Headers/Header";
+import FeaturedDestinationsSection from "@/components/FeaturedDestinationsSection/FeaturedDestinationsSection";
+
 import HeroSection from "@/components/HeroSection/HeroSection";
+import PostTravelTrip from "@/components/PostTravelTrip/PostTravelTrip";
 import SearchBar from "@/components/SearchBar/SearchBar";
 import Footer from "@/components/Shared/Footer/Footer";
+import Header from "@/components/Shared/Headers/Header";
+import TravelDetailsPage from "@/components/TravelDetailsPage/TravelDetails";
+import TravelExperienceSection from "@/components/TravelExperienceSection/TravelExperienceSection";
+import TravelInspirationSection from "@/components/TravelInspirationSection/TravelInspirationSection";
+import TravelsPage from "@/components/TravelsPage/TravelsPage";
 
 import { Container, Grid, Typography, Button } from "@mui/material";
 
@@ -33,7 +40,13 @@ const HomePage = () => {
           See More
         </Button>
         <ExtraSections />
+        <TravelInspirationSection />
+        {/* <TravelExperienceSection /> */}
+        <FeaturedDestinationsSection />
         <TravelTipsSection />
+        <TravelDetailsPage />
+        <PostTravelTrip />
+        <TravelsPage />
       </Container>
 
       <Footer />
