@@ -1,7 +1,14 @@
 import HeroSection from "@/components/HeroSection/HeroSection";
 import SearchBar from "@/components/SearchBar/SearchBar";
+import TravelCard from "@/components/TravelCard/TravelCard";
+import TravelInspirationSection from "@/components/TravelInspirationSection/TravelInspirationSection";
+
+import TravelTips from "@/components/TravelTrips/TravelTrips";
 
 import { Container, Grid, Typography, Button } from "@mui/material";
+import PostTravelTrip from "./create-trip/page";
+import TravelsPage from "@/components/TravelsPage/TravelsPage";
+import TravelPosts from "@/components/TravelPosts/travelPosts";
 
 const HomePage = () => {
   return (
@@ -9,24 +16,12 @@ const HomePage = () => {
       <HeroSection />
       <Container maxWidth="lg">
         <SearchBar />
-        <Typography variant="h4" component="h2" gutterBottom>
-          Recent Trips
-        </Typography>
-        {/* <Grid container spacing={4}>
-          {trips.map((trip) => (
-            <Grid item key={trip.id} xs={12} sm={6} md={4}>
-              <TravelCard trip={trip} />
-            </Grid>
-          ))}
-        </Grid> */}
-        <Button
-          variant="contained"
-          color="primary"
-          href="/travels"
-          sx={{ marginTop: 4 }}
-        >
-          See More
-        </Button>
+        <TravelTips />
+        <TravelPosts />
+        <TravelCard />
+        <TravelsPage/>
+        <PostTravelTrip/>
+        <TravelInspirationSection />
       </Container>
     </div>
   );
@@ -42,7 +37,7 @@ HomePage.getInitialProps = async () => {
       description: "A trip to the city of love",
       startDate: "2025-06-01",
       endDate: "2025-06-07",
-      photo: "/images/hero.jpg",
+      photo: "/images/paris.jpg",
     },
     {
       id: "2",
@@ -50,7 +45,7 @@ HomePage.getInitialProps = async () => {
       description: "Explore the bustling city",
       startDate: "2025-07-10",
       endDate: "2025-07-20",
-      photo: "/images/hero1.jpg",
+      photo: "/images/tokyo.jpg",
     },
   ];
   return { trips };

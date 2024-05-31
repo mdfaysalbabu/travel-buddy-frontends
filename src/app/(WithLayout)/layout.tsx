@@ -1,5 +1,5 @@
-import Header from "@/components/Shared/Headers/Header";
 import Footer from "@/components/Shared/Footer/Footer";
+import Header from "@/components/Shared/Headers/Header";
 
 import React from "react";
 interface WithLayoutProps {

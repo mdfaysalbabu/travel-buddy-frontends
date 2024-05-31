@@ -1,5 +1,5 @@
-'use client'
-import React, { useState } from "react";
+"use client";
+import React, { useState, useEffect } from "react";
 import {
   AppBar,
   Toolbar,
@@ -12,28 +12,62 @@ import {
   ListItemText,
   Box,
   Container,
+  Tooltip,
+  Avatar,
+  Menu,
+  MenuItem,
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import Image from "next/image";
 import Link from "next/link";
 import { useTheme, useMediaQuery } from "@mui/material";
 import logo from "@/assets/logo.png";
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
+import { logout, selectCurrentUser } from "@/redux/features/auth/authSlice";
+import { toast } from "sonner";
+import { useRouter } from "next/navigation";
+
+const settings = ["Profile", "Account", "Dashboard", "Logout"];
 
 const Header = () => {
   const [drawerOpen, setDrawerOpen] = useState(false);
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
+  const user = useAppSelector(selectCurrentUser);
+  const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
+  const [isMounted, setIsMounted] = useState(false);
+  const dispatch = useAppDispatch();
+  const router = useRouter();
 
-  const toggleDrawer = (open: boolean) => (
-    event: React.KeyboardEvent | React.MouseEvent
-  ) => {
-    if (
-      event.type === "keydown" &&
-      (event as React.KeyboardEvent).key === "Tab"
-    ) {
-      return;
-    }
-    setDrawerOpen(open);
+  const handleLogout = () => {
+    const toastId = toast.loading("loading...");
+    dispatch(logout());
+    router.push("/login");
+    toast.success("Logged out", { id: toastId, duration: 2000 });
+  };
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
+  const toggleDrawer =
+    (open: boolean) => (event: React.KeyboardEvent | React.MouseEvent) => {
+      if (
+        event.type === "keydown" &&
+        ((event as React.KeyboardEvent).key === "Tab" ||
+          (event as React.KeyboardEvent).key === "Shift")
+      ) {
+        return;
+      }
+      setDrawerOpen(open);
+    };
+
+  const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
+    setAnchorElUser(event.currentTarget);
+  };
+
+  const handleCloseUserMenu = () => {
+    setAnchorElUser(null);
   };
 
   const drawer = (
@@ -89,7 +123,15 @@ const Header = () => {
               textDecoration: "none",
             }}
           >
-            <Link href="/" passHref>
+            <Link
+              href="/"
+              passHref
+              style={{
+                color: "white",
+                textDecoration: "none",
+                fontSize: "20px",
+              }}
+            >
               Travel Buddy
             </Link>
           </Typography>
@@ -116,12 +158,7 @@ const Header = () => {
               <Link href="/" passHref>
                 <Button
                   variant="text"
-                  sx={{
-                    color: "#fff",
-                    "&:hover": {
-                      color: "#ddd",
-                    },
-                  }}
+                  sx={{ color: "#fff", "&:hover": { color: "#ddd" } }}
                 >
                   Home
                 </Button>
@@ -129,42 +166,49 @@ const Header = () => {
               <Link href="/about" passHref>
                 <Button
                   variant="text"
-                  sx={{
-                    color: "#fff",
-                    "&:hover": {
-                      color: "#ddd",
-                    },
-                  }}
+                  sx={{ color: "#fff", "&:hover": { color: "#ddd" } }}
                 >
                   About Us
                 </Button>
               </Link>
-              <Link href="/login" passHref>
-                <Button
-                  variant="text"
-                  sx={{
-                    color: "#fff",
-                    "&:hover": {
-                      color: "#ddd",
-                    },
-                  }}
-                >
-                  Login
-                </Button>
-              </Link>
-              <Link href="/register" passHref>
-                <Button
-                  variant="text"
-                  sx={{
-                    color: "#fff",
-                    "&:hover": {
-                      color: "#ddd",
-                    },
-                  }}
-                >
-                  Register
-                </Button>
-              </Link>
+              {isMounted && user ? (
+                <Box sx={{ flexGrow: 0 }}>
+                  <Tooltip title="Open Menu">
+                    <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                      <Avatar
+                        alt={user?.name || "Nasim"}
+                        src="/static/images/avatar/2.jpg"
+                      />
+                    </IconButton>
+                  </Tooltip>
+                  <Menu
+                    sx={{ mt: "45px" }}
+                    id="menu-appbar"
+                    anchorEl={anchorElUser}
+                    anchorOrigin={{ vertical: "top", horizontal: "right" }}
+                    keepMounted
+                    transformOrigin={{ vertical: "top", horizontal: "right" }}
+                    open={Boolean(anchorElUser)}
+                    onClose={handleCloseUserMenu}
+                  >
+                    <MenuItem onClick={handleCloseUserMenu}>
+                      <Typography textAlign="center">Profile</Typography>
+                    </MenuItem>
+                    <MenuItem onClick={handleLogout}>
+                      <Typography textAlign="center">Logout</Typography>
+                    </MenuItem>
+                  </Menu>
+                </Box>
+              ) : (
+                <Link href="/login" passHref>
+                  <Button
+                    variant="text"
+                    sx={{ color: "#fff", "&:hover": { color: "#ddd" } }}
+                  >
+                    Login
+                  </Button>
+                </Link>
+              )}
             </>
           )}
         </Toolbar>
