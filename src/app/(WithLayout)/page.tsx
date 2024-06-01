@@ -9,6 +9,12 @@ import { Container, Grid, Typography, Button } from "@mui/material";
 import PostTravelTrip from "./create-trip/page";
 import TravelsPage from "@/components/TravelsPage/TravelsPage";
 import TravelPosts from "@/components/TravelPosts/travelPosts";
+import TravelEdit from "@/components/TravelEdit/TravelEdit";
+import MyProfile from "@/components/MyProfile/MyProfile";
+import TravelRequestHistory from "@/components/TravelRequestHistory/TravelRequestHistory";
+import EditProfile from "@/components/EditProfile/EditProfile";
+import ChangePassword from "@/components/ChangePassword/ChangePassword";
+import TravelPostsAll from "@/components/TravelPostsAll/TravelPostsAll";
 
 const HomePage = () => {
   return (
@@ -17,7 +23,13 @@ const HomePage = () => {
       <Container maxWidth="lg">
         <SearchBar />
         <TravelTips />
+        <TravelPostsAll/>
+        <MyProfile/>
+        <EditProfile/>
+        <ChangePassword/>
+        <TravelRequestHistory/>
         <TravelPosts />
+        <TravelEdit/>
         <TravelCard />
         <TravelsPage/>
         <PostTravelTrip/>

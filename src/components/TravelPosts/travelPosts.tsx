@@ -3,6 +3,7 @@ import React from 'react';
 import { Container, Grid, Card, CardMedia, CardContent, CardActions, Typography, Button, IconButton } from '@mui/material';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
+import Link from 'next/link';
 
 const travelPosts = [
   {
@@ -94,14 +95,15 @@ const TravelPosts = () => {
                 </Typography>
               </CardContent>
               <CardActions sx={{ justifyContent: 'space-between' }}>
-                <Button
-                  size="small"
-                  color="primary"
-                  onClick={() => handleEdit(post.id)}
-                  sx={{ fontFamily: 'Montserrat, sans-serif', color: 'white' }}
-                >
-                  <EditIcon /> Edit
-                </Button>
+                <Link href={`/travel-edit?id=${post.id}`} passHref>
+                  <Button
+                    size="small"
+                    color="primary"
+                    sx={{ fontFamily: 'Montserrat, sans-serif', color: 'white' }}
+                  >
+                    <EditIcon /> Edit
+                  </Button>
+                </Link>
                 <IconButton size="small" color="secondary" onClick={() => handleDelete(post.id)}>
                   <DeleteIcon sx={{ color: '#e74c3c' }} />
                 </IconButton>
