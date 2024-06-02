@@ -1,7 +1,6 @@
 import HeroSection from "@/components/HeroSection/HeroSection";
 import SearchBar from "@/components/SearchBar/SearchBar";
 import TravelCard from "@/components/TravelCard/TravelCard";
-import TravelInspirationSection from "@/components/TravelInspirationSection/TravelInspirationSection";
 
 import TravelTips from "@/components/TravelTrips/TravelTrips";
 
@@ -12,9 +11,8 @@ import TravelPosts from "@/components/TravelPosts/travelPosts";
 import TravelEdit from "@/components/TravelEdit/TravelEdit";
 import MyProfile from "@/components/MyProfile/MyProfile";
 import TravelRequestHistory from "@/components/TravelRequestHistory/TravelRequestHistory";
-import EditProfile from "@/components/EditProfile/EditProfile";
-import ChangePassword from "@/components/ChangePassword/ChangePassword";
 import TravelPostsAll from "@/components/TravelPostsAll/TravelPostsAll";
+import TravelInspirationSection from "@/components/ExtrasectionAll/TravelInspirationSection/TravelInspirationSection";
 
 const HomePage = () => {
   return (
@@ -23,16 +21,14 @@ const HomePage = () => {
       <Container maxWidth="lg">
         <SearchBar />
         <TravelTips />
-        <TravelPostsAll/>
-        <MyProfile/>
-        <EditProfile/>
-        <ChangePassword/>
-        <TravelRequestHistory/>
+        <TravelPostsAll />
+        <MyProfile />
+        <TravelRequestHistory />
         <TravelPosts />
-        <TravelEdit/>
+        <TravelEdit />
         <TravelCard />
-        <TravelsPage/>
-        <PostTravelTrip/>
+        <TravelsPage />
+        <PostTravelTrip />
         <TravelInspirationSection />
       </Container>
     </div>

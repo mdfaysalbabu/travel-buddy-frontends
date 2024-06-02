@@ -1,22 +1,28 @@
 'use client'
-import React from 'react';
-import { Container, Typography, Box, Card, Button } from '@mui/material';
-import EditIcon from '@mui/icons-material/Edit';
-import LockIcon from '@mui/icons-material/Lock';
+
+import React, { useState } from 'react';
+import { Container, Grid, Box, Typography, List, ListItem, ListItemText, Divider } from '@mui/material';
+
+
+import ProfileEdit from '../Profile/Edit';
+import ChangePassword from '../Profile/ChangePassword';
 
 const MyProfile = () => {
-  const handleEditProfile = () => {
-    // Implement edit profile functionality
-    console.log('Edit Profile');
-  };
+  const [selectedSection, setSelectedSection] = useState('editProfile');
 
-  const handleChangePassword = () => {
-    // Implement change password functionality
-    console.log('Change Password');
+  const renderSection = () => {
+    switch (selectedSection) {
+      case 'editProfile':
+        return <ProfileEdit />;
+      case 'changePassword':
+        return <ChangePassword />;
+      default:
+        return null;
+    }
   };
 
   return (
-    <Container maxWidth="sm" sx={{ marginTop: '2rem' }}>
+    <Container maxWidth="lg" sx={{ marginTop: '2rem' }}>
       <Typography
         variant="h4"
         align="center"
@@ -25,39 +31,51 @@ const MyProfile = () => {
       >
         My Profile
       </Typography>
-      <Box sx={{ marginTop: '2rem', marginBottom: '2rem' }}>
-        <Card sx={{ padding: '2rem', borderRadius: '15px', boxShadow: '0 4px 20px rgba(0, 0, 0, 0.1)' }}>
-          <Typography variant="h5" sx={{ fontFamily: 'Montserrat, sans-serif', color: '#34495e', fontWeight: 600 }}>
-            User Account Information
-          </Typography>
-          <Typography variant="body1" sx={{ fontFamily: 'Roboto, sans-serif', color: '#7f8c8d', marginTop: '1rem' }}>
-            Username: faysal
-          </Typography>
-          <Typography variant="body1" sx={{ fontFamily: 'Roboto, sans-serif', color: '#7f8c8d' }}>
-            Email: faysal@gmail.com
-          </Typography>
-          <Box sx={{ marginTop: '2rem', display: 'flex', justifyContent: 'space-between' }}>
-            <Button
-              variant="contained"
-              color="primary"
-              startIcon={<EditIcon />}
-              onClick={handleEditProfile}
-              sx={{ fontFamily: 'Montserrat, sans-serif' }}
+      <Grid container spacing={4}>
+        <Grid item xs={12} md={4}>
+          <Box
+            sx={{
+              backgroundColor: '#ecf0f1',
+              borderRadius: '15px',
+              padding: '1rem',
+              boxShadow: '0 4px 20px rgba(0, 0, 0, 0.1)',
+            }}
+          >
+            <Typography
+              variant="h6"
+              gutterBottom
+              sx={{ fontFamily: 'Montserrat, sans-serif', color: '#34495e', fontWeight: 600 }}
             >
-              Edit Profile
-            </Button>
-            <Button
-              variant="outlined"
-              color="secondary"
-              startIcon={<LockIcon />}
-              onClick={handleChangePassword}
-              sx={{ fontFamily: 'Montserrat, sans-serif' }}
-            >
-              Change Password
-            </Button>
+              Settings
+            </Typography>
+            <List component="nav">
+              <ListItem button onClick={() => setSelectedSection('editProfile')}>
+                <ListItemText primary="Edit Profile" />
+              </ListItem>
+              <Divider />
+              <ListItem button onClick={() => setSelectedSection('changePassword')}>
+                <ListItemText primary="Change Password" />
+              </ListItem>
+              <Divider />
+            </List>
           </Box>
-        </Card>
-      </Box>
+        </Grid>
+        <Grid item xs={12} md={8}>
+          <Box
+            sx={{
+              backgroundColor: '#ecf0f1',
+              borderRadius: '15px',
+              padding: '2rem',
+              boxShadow: '0 4px 20px rgba(0, 0, 0, 0.1)',
+              minHeight: '400px',
+            }}
+          >
+            
+                <div>{renderSection()}</div>
+              
+          </Box>
+        </Grid>
+      </Grid>
     </Container>
   );
 };
