@@ -2,6 +2,8 @@
 
 import React from "react";
 import DashboardDrawer from "@/components/Dashboard/DashboardDrawer/DashboardDrawer";
+import ProtectedRoute from "@/utils/PrivateRoutes";
+
 // import { useRouter } from "next/navigation";
 
 interface DashboardLayoutProps {
@@ -9,12 +11,11 @@ interface DashboardLayoutProps {
 }
 
 const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children }) => {
-  // const router = useRouter();
-  // if (!isLoggedIn()) {
-  //   return router.push("/login");
-  // }
-
-  return <DashboardDrawer>{children}</DashboardDrawer>;
+  return (
+    <ProtectedRoute>
+      <DashboardDrawer>{children}</DashboardDrawer>
+    </ProtectedRoute>
+  );
 };
 
 export default DashboardLayout;

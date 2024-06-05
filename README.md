@@ -1,36 +1,32 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+- # Travel Buddy Application
+- Make a Travel Buddy application with Typescript,NextJS,Redux,Material UI etc.This is a travel body matching Full-Stack project.Here you can registration and login also.then you will create a trip and request to the another people for joining your trip. you can update your profile.You can searching or filtering easily in this project
 
-## Getting Started
+## Live URL
 
-First, run the development server:
+[https://travel-buddy-frontend.vercel.app](https://travel-buddy-frontend.vercel.app)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Server Link
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+[https://travel-buddy-chi.vercel.app](https://travel-buddy-chi.vercel.app)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Video Description
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+[https://drive.google.com/file/d/1guo3aTDmuy-a4CMqo2P60gN_lDa2bA3L/view?usp=sharing](https://drive.google.com/file/d/1guo3aTDmuy-a4CMqo2P60gN_lDa2bA3L/view?usp=sharing)
 
-## Learn More
 
-To learn more about Next.js, take a look at the following resources:
+- ## Technology used
+* Next.js
+* Redux toolkit
+* Typescript
+* MUI
+* jsonwebtoken
+* Framer Motion
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Instruction to run this project locally:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+1: clone this repository.
 
-## Deploy on Vercel
+2: write this command on your terminal:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+3 npm install
+4: npm run dev

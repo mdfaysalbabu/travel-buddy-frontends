@@ -1,49 +1,76 @@
-'use client'
-import React, { useState } from 'react';
-import { Container, Typography, TextField, Button, Box } from '@mui/material';
+"use client";
+import React, { useState } from "react";
+import { Container, Typography, TextField, Button, Box } from "@mui/material";
+import { useUpdateProfileMutation } from "@/redux/features/auth/authApi";
+import { toast } from "sonner";
+import PersonIcon from "@mui/icons-material/Person";
 
 const ProfileEdit = () => {
-  const [username, setUsername] = useState('');
-  const [email, setEmail] = useState('');
+  const [name, setName] = useState("");
+  const [updateProfile] = useUpdateProfileMutation();
 
-  const handleSave = () => {
-    // Implement save functionality
-    console.log('Profile saved');
+  const handleSave = async (e:any) => {
+    e.preventDefault();
+    const toastId = toast.loading("Updating...");
+    try {
+      const res = await updateProfile({ name });
+      if (res?.data?.success === true) {
+        toast.success("Profile updated successfully", { id: toastId });
+      }
+    } catch (error) {
+      toast.error("Failed to update profile", { id: toastId });
+    }
   };
 
   return (
-    <Container maxWidth="sm" sx={{ marginTop: '2rem' }}>
+    <Container maxWidth="sm" sx={{ marginTop: "2rem" }}>
       <Typography
         variant="h4"
         align="center"
         gutterBottom
-        sx={{ fontFamily: 'Montserrat, sans-serif', color: '#2c3e50', fontWeight: 700 }}
+        sx={{
+          fontFamily: "Arial, sans-serif",
+          color: "#673AB7",
+          fontWeight: 700,
+          textTransform: "uppercase",
+          marginBottom: "2rem",
+        }}
       >
         Edit Profile
       </Typography>
-      <Box sx={{ backgroundColor: '#ecf0f1', borderRadius: '15px', padding: '2rem', boxShadow: '0 4px 20px rgba(0, 0, 0, 0.1)' }}>
+      <Box
+        component="form"
+        onSubmit={handleSave}
+        sx={{
+          backgroundColor: "#EDE7F6",
+          borderRadius: "15px",
+          padding: "2rem",
+          boxShadow: "0 4px 20px rgba(0, 0, 0, 0.1)",
+        }}
+      >
         <TextField
           fullWidth
-          label="Username"
+          label="Name"
           variant="outlined"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-          sx={{ marginBottom: '1rem' }}
-        />
-        <TextField
-          fullWidth
-          label="Email"
-          variant="outlined"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          sx={{ marginBottom: '1rem' }}
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          sx={{ marginBottom: "1rem" }}
+          InputProps={{
+            startAdornment: (
+              <PersonIcon sx={{ color: "#673AB7", marginRight: "0.5rem" }} />
+            ),
+          }}
         />
         <Button
           variant="contained"
           color="primary"
           fullWidth
-          onClick={handleSave}
-          sx={{ fontFamily: 'Montserrat, sans-serif', backgroundColor: '#3498db', '&:hover': { backgroundColor: '#2980b9' } }}
+          type="submit"
+          sx={{
+            fontFamily: "Arial, sans-serif",
+            backgroundColor: "#673AB7",
+            "&:hover": { backgroundColor: "#512DA8" },
+          }}
         >
           Save Changes
         </Button>

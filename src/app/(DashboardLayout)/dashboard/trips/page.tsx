@@ -1,85 +1,75 @@
 "use client";
+import React from "react";
 import {
   Box,
-  FormControl,
+  Typography,
   IconButton,
-  InputLabel,
-  MenuItem,
-  Select,
-  SelectChangeEvent,
+  Grid,
+  Paper,
+  CircularProgress,
 } from "@mui/material";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
-import Image from "next/image";
 import DeleteIcon from "@mui/icons-material/Delete";
-import EditIcon from "@mui/icons-material/Edit";
 import { toast } from "sonner";
-import { useGetAllUserQuery } from "@/redux/features/auth/authApi";
-import React from "react";
-import { useGetAllTripsQuery } from "@/redux/features/trip/tripApi";
+import {
+  useGetAllTripsQuery,
+  useDeleteTripMutation,
+} from "@/redux/features/trip/tripApi";
 
 const TripManagement = () => {
   const { data: trips, isLoading } = useGetAllTripsQuery(undefined);
-  console.log(trips);
+  const [deleteTrip] = useDeleteTripMutation();
 
-  const [status, setStatus] = React.useState("");
-
-  const handleChange = (event: SelectChangeEvent) => {
-    setStatus(event.target.value as string);
+  const handleDelete = async (id: string) => {
+    const toastId = toast.loading("Deleting trip...");
+    try {
+      const res = await deleteTrip(id);
+      if (res?.data?.success === true) {
+        toast.success("Trip deleted successfully", { id: toastId });
+      }
+    } catch (error) {
+      toast.error("Failed to delete trip", { id: toastId });
+    }
   };
 
-  // console.log(data);
   const columns: GridColDef[] = [
-    { field: "destination", headerName: "Destination", width: 400 },
+    { field: "destination", headerName: "Destination", width: 300,  },
+    { field: "budget", headerName: "Budget", width: 300,  },
+    { field: "type", headerName: "Trip Type", width: 300,  },
     {
-      field: "budget",
-      headerName: "Budget",
-      width: 400,
-    },
-    {
-      field: "edit",
+      field: "action",
       headerName: "Action",
-      flex: 1,
-      headerAlign: "center",
-      align: "center",
-      renderCell: ({ row }) => {
-        return (
-          <IconButton
-            //  onClick={() => handleDelete(row.id)}
-            aria-label="edit"
-          >
-            <EditIcon />
-          </IconButton>
-        );
-      },
-    },
-    {
-      field: "delete",
-      headerName: "Action",
-      flex: 1,
-      headerAlign: "center",
-      align: "center",
-      renderCell: ({ row }) => {
-        return (
-          <IconButton
-            //  onClick={() => handleDelete(row.id)}
-            aria-label="delete"
-          >
-            <DeleteIcon />
-          </IconButton>
-        );
-      },
+      width: 200,
+      sortable: false,
+      renderCell: ({ row }) => (
+        <IconButton onClick={() => handleDelete(row.id)} aria-label="delete">
+          <DeleteIcon />
+        </IconButton>
+      ),
     },
   ];
 
   return (
-    <Box my={2}>
-      {!isLoading ? (
-        <Box my={2}>
-          <DataGrid rows={trips?.data} columns={columns} hideFooter={true} />
+    <Box mx={2} my={4}>
+      <Typography variant="h4" gutterBottom color={"teal"}>
+        Trip Management
+      </Typography>
+      <Paper elevation={3} sx={{ borderRadius: 8 }}>
+        <Box sx={{ height: 400, width: "100%" }}>
+          {!isLoading ? (
+            <DataGrid rows={trips?.data} columns={columns} />
+          ) : (
+            <Grid
+              container
+              justifyContent="center"
+              alignItems="center"
+              height="100%"
+            >
+              <CircularProgress />
+            </Grid>
+          )}
         </Box>
-      ) : (
-        <h1>Loading.....</h1>
-      )}
+      </Paper>
     </Box>
   );
 };

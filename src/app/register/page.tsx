@@ -15,7 +15,6 @@ import { FieldValues, useForm } from "react-hook-form";
 import { toast } from "sonner";
 
 const Register = () => {
-  const [error, setError] = useState("");
   const [registerUser] = useRegisterMutation();
   const { register, handleSubmit } = useForm();
   const router = useRouter();
@@ -54,87 +53,101 @@ const Register = () => {
   };
 
   return (
-    <Container maxWidth="xs">
-      <Stack
+    <Container
+      maxWidth="xs"
+      sx={{
+        backgroundImage: `url('/images/hero1.jpg')`, // Path to your image
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        height: "100vh",
+      }}
+    >
+      <Box
         sx={{
-          justifyContent: "center",
-          alignItems: "center",
-          height: "100vh",
+          backgroundColor: "rgba(255, 255, 255, 0.9)",
+          borderRadius: "8px",
+          padding: "24px",
+          boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.1)",
+          width: "100%",
+          maxWidth: "400px",
         }}
       >
-        <Box
-          sx={{
-            backgroundColor: "rgba(255, 255, 255, 0.8)",
-            borderRadius: "8px",
-            padding: "24px",
-            boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.1)",
-          }}
+        <Typography
+          variant="h5"
+          component="h2"
+          textAlign="center"
+          mb={4}
+          color={"#673ab7"}
+          fontWeight="bold"
         >
-          <Typography
-            variant="h5"
-            component="h2"
-            textAlign="center"
-            mb={4}
-            color={"purple"}
-            fontSize={"bold"}
-          >
-            Travel Buddy Registration
-          </Typography>
+          Travel Buddy Registration
+        </Typography>
 
-          <form onSubmit={handleSubmit(onSubmit)}>
-            <TextField
-              {...register("name")}
-              fullWidth
-              label="Name"
-              variant="outlined"
-              margin="normal"
-              name="name"
-              required
-            />
-            <TextField
-              {...register("email")}
-              fullWidth
-              label="Email"
-              variant="outlined"
-              margin="normal"
-              name="email"
-              required
-            />
-            <TextField
-              {...register("password")}
-              fullWidth
-              label="Password"
-              variant="outlined"
-              margin="normal"
-              type="password"
-              name="password"
-              required
-            />
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <TextField
+            {...register("name")}
+            fullWidth
+            label="Name"
+            variant="outlined"
+            margin="normal"
+            name="name"
+            required
+            color="primary"
+          />
+          <TextField
+            {...register("email")}
+            fullWidth
+            label="Email"
+            variant="outlined"
+            margin="normal"
+            name="email"
+            required
+            color="primary"
+          />
+          <TextField
+            {...register("password")}
+            fullWidth
+            label="Password"
+            variant="outlined"
+            margin="normal"
+            type="password"
+            name="password"
+            required
+            color="primary"
+          />
+          <Button
+            fullWidth
+            type="submit"
+            variant="contained"
+            color="primary"
+            sx={{
+              mt: 3,
+              bgcolor: "#673ab7",
+              "&:hover": {
+                bgcolor: "#512da8",
+              },
+            }}
+          >
+            Register
+          </Button>
+        </form>
+
+        <Stack sx={{ textAlign: "center", mt: 2 }}>
+          <Typography variant="body1" sx={{ color: "#333" }}>
+            Already have an account?{" "}
             <Button
-              fullWidth
-              type="submit"
-              variant="contained"
               color="primary"
-              sx={{ mt: 3 }}
+              variant="text"
+              onClick={() => router.push("/login")}
             >
               Login
             </Button>
-          </form>
-
-          <Box sx={{ textAlign: "center", mt: 2 }}>
-            <Typography variant="body1" sx={{ color: "#333" }}>
-              Already have an account?{" "}
-              <Button
-                color="primary"
-                variant="text"
-                onClick={() => router.push("/login")}
-              >
-                Login
-              </Button>
-            </Typography>
-          </Box>
-        </Box>
-      </Stack>
+          </Typography>
+        </Stack>
+      </Box>
     </Container>
   );
 };

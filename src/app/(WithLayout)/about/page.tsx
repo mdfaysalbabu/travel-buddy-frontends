@@ -33,9 +33,9 @@ const theme = createTheme({
 });
 
 const teamMembers = [
-  { name: "Alice Johnson", role: "Founder", image: "/assets/images/alice.jpg" },
-  { name: "Bob Smith", role: "CTO", image: "/assets/images/bob.jpg" },
-  { name: "Carol White", role: "Designer", image: "/assets/images/carol.jpg" },
+  { name: "Faysal", role: "Founder", image: "images/hero1.jpg" },
+  { name: "Babu", role: "CTO", image: "images/hero1.jpg" },
+  { name: "Jony", role: "Designer", image: "images/hero1.jpg" },
 ];
 
 const AboutUs = () => {
@@ -210,7 +210,7 @@ const AboutUs = () => {
             <Typography variant="body1">
               Follow us on{" "}
               <Link
-                href="https://socialmedia.com"
+                href="https://faysal.com"
                 target="_blank"
                 rel="noopener noreferrer"
                 sx={{

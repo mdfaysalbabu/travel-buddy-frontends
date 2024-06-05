@@ -1,5 +1,5 @@
 import Footer from "@/components/Shared/Footer/Footer";
-import Header from "@/components/Shared/Headers/Header";
+import Navbar from "@/components/Shared/Headers/Header";
 
 import React from "react";
 interface WithLayoutProps {
@@ -8,7 +8,7 @@ interface WithLayoutProps {
 const WithLayout: React.FC<WithLayoutProps> = ({ children }) => {
   return (
     <>
-      <Header />
+      <Navbar />
       {children}
       <Footer />
     </>

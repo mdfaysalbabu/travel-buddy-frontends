@@ -34,9 +34,9 @@ const Sidebar: FC<SidebarProps> = ({ open }) => {
         gap={1}
       ></Stack>
       <List sx={{ flexGrow: 1 }}>
-        <ListItem disablePadding sx={{ display: "block" }}>
+        <ListItem disablePadding sx={{ display: "block", borderRadius: "10px" }}>
           <Link href="/dashboard" passHref legacyBehavior>
-            <ListItemButton>
+            <ListItemButton sx={{ borderRadius: "10px", transition: "background-color 0.3s" }}>
               <ListItemIcon
                 sx={{
                   minWidth: 0,
@@ -44,15 +44,15 @@ const Sidebar: FC<SidebarProps> = ({ open }) => {
                   justifyContent: "center",
                 }}
               >
-                <DashboardIcon sx={{ fontSize: 30 }} />
+                <DashboardIcon sx={{ fontSize: 30, color: '#FF5722' }} />
               </ListItemIcon>
-              {open && <ListItemText primary="Dashboard" sx={{ opacity: 1 }} />}
+              {open && <ListItemText primary="Dashboard" sx={{ opacity: 1, color: '#FF5722' }} />}
             </ListItemButton>
           </Link>
         </ListItem>
-        <ListItem disablePadding sx={{ display: "block" }}>
+        <ListItem disablePadding sx={{ display: "block", borderRadius: "10px" }}>
           <Link href="/dashboard/users" passHref legacyBehavior>
-            <ListItemButton>
+            <ListItemButton sx={{ borderRadius: "10px", transition: "background-color 0.3s" }}>
               <ListItemIcon
                 sx={{
                   minWidth: 0,
@@ -60,17 +60,17 @@ const Sidebar: FC<SidebarProps> = ({ open }) => {
                   justifyContent: "center",
                 }}
               >
-                <PeopleOutlineIcon sx={{ fontSize: 30 }} />
+                <PeopleOutlineIcon sx={{ fontSize: 30, color: '#E91E63' }} />
               </ListItemIcon>
               {open && (
-                <ListItemText primary="User Management" sx={{ opacity: 1 }} />
+                <ListItemText primary="User Management" sx={{ opacity: 1, color: '#E91E63' }} />
               )}
             </ListItemButton>
           </Link>
         </ListItem>
-        <ListItem disablePadding sx={{ display: "block" }}>
+        <ListItem disablePadding sx={{ display: "block", borderRadius: "10px" }}>
           <Link href="/dashboard/trips" passHref legacyBehavior>
-            <ListItemButton>
+            <ListItemButton sx={{ borderRadius: "10px", transition: "background-color 0.3s" }}>
               <ListItemIcon
                 sx={{
                   minWidth: 0,
@@ -78,17 +78,17 @@ const Sidebar: FC<SidebarProps> = ({ open }) => {
                   justifyContent: "center",
                 }}
               >
-                <ConnectingAirportsIcon sx={{ fontSize: 30 }} />
+                <ConnectingAirportsIcon sx={{ fontSize: 30, color: 'purple' }} />
               </ListItemIcon>
               {open && (
-                <ListItemText primary="Trip Management" sx={{ opacity: 1 }} />
+                <ListItemText primary="Trip Management" sx={{ opacity: 1, color: 'purple' }} />
               )}
             </ListItemButton>
           </Link>
         </ListItem>
-        <ListItem disablePadding sx={{ display: "block" }}>
+        <ListItem disablePadding sx={{ display: "block", borderRadius: "10px" }}>
           <Link href="/dashboard/change-password" passHref legacyBehavior>
-            <ListItemButton>
+            <ListItemButton sx={{ borderRadius: "10px", transition: "background-color 0.3s" }}>
               <ListItemIcon
                 sx={{
                   minWidth: 0,
@@ -96,10 +96,10 @@ const Sidebar: FC<SidebarProps> = ({ open }) => {
                   justifyContent: "center",
                 }}
               >
-                <VpnKeyIcon sx={{ fontSize: 30 }} />
+                <VpnKeyIcon sx={{ fontSize: 30, color: 'teal' }} />
               </ListItemIcon>
               {open && (
-                <ListItemText primary="Change Password" sx={{ opacity: 1 }} />
+                <ListItemText primary="Change Password" sx={{ opacity: 1, color: 'teal' }} />
               )}
             </ListItemButton>
           </Link>

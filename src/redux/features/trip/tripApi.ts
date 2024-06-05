@@ -13,10 +13,11 @@ const TripApi = baseApi.injectEndpoints({
       invalidatesTags: ["trips"],
     }),
     getAllTrips: builder.query({
-      query: () => {
+      query: (query) => {
         return {
           url: `/trips`,
           method: "GET",
+          params: query,
         };
       },
       providesTags: ["trips"],
@@ -30,8 +31,31 @@ const TripApi = baseApi.injectEndpoints({
       },
       providesTags: ["trips"],
     }),
+    deleteTrip: builder.mutation({
+      query: (id) => {
+        return {
+          url: `/trip/${id}`,
+          method: "DELETE",
+        };
+      },
+      invalidatesTags: ["trips"],
+    }),
+    getUserTrip: builder.query({
+      query: () => {
+        return {
+          url: `/userTrip`,
+          method: "GET",
+        };
+      },
+      providesTags: ["trips"],
+    }),
   }),
 });
 
-export const { useGetAllTripsQuery, useGetTripQuery, useCreateTripMutation } =
-  TripApi;
+export const {
+  useGetAllTripsQuery,
+  useGetTripQuery,
+  useCreateTripMutation,
+  useDeleteTripMutation,
+  useGetUserTripQuery,
+} = TripApi;

@@ -4,7 +4,6 @@ const buddyApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     requestBuddy: builder.mutation({
       query: (data) => {
-        console.log(data);
         return {
           url: `/trip/${data.tripId}/request`,
           method: "POST",
@@ -13,16 +12,17 @@ const buddyApi = baseApi.injectEndpoints({
       },
       invalidatesTags: ["buddy"],
     }),
-    // getTrip: builder.query({
-    //   query: (id) => {
-    //     return {
-    //       url: `/trips/${id}`,
-    //       method: "GET",
-    //     };
-    //   },
-    //   providesTags: ["trips"],
-    // }),
+    buddyRequestHistory: builder.query({
+      query: () => {
+        return {
+          url: `/travel-buddies`,
+          method: "GET",
+        };
+      },
+      providesTags: ["buddy"],
+    }),
   }),
 });
 
-export const { useRequestBuddyMutation } = buddyApi;
+export const { useRequestBuddyMutation, useBuddyRequestHistoryQuery } =
+  buddyApi;

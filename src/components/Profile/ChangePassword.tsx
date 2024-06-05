@@ -1,66 +1,148 @@
-'use client'
-import React, { useState } from 'react';
-import { Container, Typography, TextField, Button, Box } from '@mui/material';
+"use client";
+import React, { useState } from "react";
+import {
+  Container,
+  Typography,
+  TextField,
+  Button,
+  Box,
+  IconButton,
+  InputAdornment,
+  createTheme,
+  ThemeProvider,
+} from "@mui/material";
+import { toast } from "sonner";
+import { FieldValues, useForm } from "react-hook-form";
+import LockIcon from "@mui/icons-material/Lock";
+import VisibilityIcon from "@mui/icons-material/Visibility";
+import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
+import { useChangePasswordMutation } from "@/redux/features/auth/authApi";
+
+const customTheme = createTheme({
+  palette: {
+    primary: {
+      main: "#673AB7", // Custom primary color (Deep Purple)
+    },
+    secondary: {
+      main: "#FF5722", // Custom secondary color (Deep Orange)
+    },
+  },
+});
 
 const ChangePassword = () => {
-  const [currentPassword, setCurrentPassword] = useState('');
-  const [newPassword, setNewPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
+  const { register, handleSubmit, reset } = useForm();
+  const [showPassword, setShowPassword] = useState(false);
+  const [changeUserPassword] = useChangePasswordMutation();
+  const handleShowPassword = () => {
+    setShowPassword((prevShowPassword) => !prevShowPassword);
+  };
 
-  const handleChangePassword = () => {
-    // Implement change password functionality
-    console.log('Password changed');
+  const onSubmit = async (data: FieldValues) => {
+    const toastId = toast.loading("Please wait...");
+    try {
+      const updatedPassword = {
+        oldPassword: data.oldPassword,
+        newPassword: data.newPassword,
+      };
+      const res: any = await changeUserPassword(updatedPassword);
+      if (res?.data?.success === true) {
+        reset();
+        toast.success("Password changed successfully!", {
+          id: toastId,
+          duration: 2000,
+        });
+      }
+    } catch (error) {
+      toast.error("Something went wrong!", { id: toastId, duration: 2000 });
+    }
   };
 
   return (
-    <Container maxWidth="sm" sx={{ marginTop: '2rem' }}>
-      <Typography
-        variant="h4"
-        align="center"
-        gutterBottom
-        sx={{ fontFamily: 'Montserrat, sans-serif', color: '#2c3e50', fontWeight: 700 }}
-      >
-        Change Password
-      </Typography>
-      <Box sx={{ backgroundColor: '#ecf0f1', borderRadius: '15px', padding: '2rem', boxShadow: '0 4px 20px rgba(0, 0, 0, 0.1)' }}>
-        <TextField
-          fullWidth
-          label="Current Password"
-          type="password"
-          variant="outlined"
-          value={currentPassword}
-          onChange={(e) => setCurrentPassword(e.target.value)}
-          sx={{ marginBottom: '1rem' }}
-        />
-        <TextField
-          fullWidth
-          label="New Password"
-          type="password"
-          variant="outlined"
-          value={newPassword}
-          onChange={(e) => setNewPassword(e.target.value)}
-          sx={{ marginBottom: '1rem' }}
-        />
-        <TextField
-          fullWidth
-          label="Confirm New Password"
-          type="password"
-          variant="outlined"
-          value={confirmPassword}
-          onChange={(e) => setConfirmPassword(e.target.value)}
-          sx={{ marginBottom: '1rem' }}
-        />
-        <Button
-          variant="contained"
-          color="primary"
-          fullWidth
-          onClick={handleChangePassword}
-          sx={{ fontFamily: 'Montserrat, sans-serif', backgroundColor: '#3498db', '&:hover': { backgroundColor: '#2980b9' } }}
+    <ThemeProvider theme={customTheme}>
+      <Container maxWidth="sm" sx={{ marginTop: "2rem" }}>
+        <Typography
+          variant="h4"
+          align="center"
+          gutterBottom
+          sx={{
+            fontFamily: "Roboto, sans-serif",
+            color: "#673AB7", // Deep Purple
+            fontWeight: 700,
+            marginBottom: "2rem",
+          }}
         >
           Change Password
-        </Button>
-      </Box>
-    </Container>
+        </Typography>
+        <Box
+          sx={{
+            backgroundColor: "#F9F9F9", // Light Grey
+            borderRadius: "10px",
+            padding: "2rem",
+            boxShadow: "0 4px 20px rgba(0, 0, 0, 0.1)",
+          }}
+        >
+          <form onSubmit={handleSubmit(onSubmit)}>
+            <TextField
+              fullWidth
+              label="Current Password"
+              type={showPassword ? "text" : "password"}
+              variant="outlined"
+              {...register("oldPassword")}
+              sx={{ marginBottom: "1.5rem" }}
+              InputProps={{
+                startAdornment: <LockIcon sx={{ color: "#673AB7" }} />,
+                endAdornment: (
+                  <InputAdornment position="end">
+                    <IconButton onClick={handleShowPassword} edge="end">
+                      {showPassword ? (
+                        <VisibilityOffIcon />
+                      ) : (
+                        <VisibilityIcon />
+                      )}
+                    </IconButton>
+                  </InputAdornment>
+                ),
+              }}
+            />
+            <TextField
+              fullWidth
+              label="New Password"
+              type={showPassword ? "text" : "password"}
+              variant="outlined"
+              {...register("newPassword")}
+              sx={{ marginBottom: "1.5rem" }}
+              InputProps={{
+                startAdornment: <LockIcon sx={{ color: "#673AB7" }} />,
+                endAdornment: (
+                  <InputAdornment position="end">
+                    <IconButton onClick={handleShowPassword} edge="end">
+                      {showPassword ? (
+                        <VisibilityOffIcon />
+                      ) : (
+                        <VisibilityIcon />
+                      )}
+                    </IconButton>
+                  </InputAdornment>
+                ),
+              }}
+            />
+            <Button
+              variant="contained"
+              color="primary"
+              fullWidth
+              type="submit"
+              sx={{
+                fontFamily: "Roboto, sans-serif",
+                backgroundColor: "#673AB7", // Deep Purple
+                "&:hover": { backgroundColor: "#512DA8" }, // Darker shade on hover
+              }}
+            >
+              Change Password
+            </Button>
+          </form>
+        </Box>
+      </Container>
+    </ThemeProvider>
   );
 };
 

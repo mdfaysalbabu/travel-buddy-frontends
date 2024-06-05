@@ -20,22 +20,21 @@ import {
 import MenuIcon from "@mui/icons-material/Menu";
 import Image from "next/image";
 import Link from "next/link";
-import { useTheme, useMediaQuery } from "@mui/material";
+import useTheme from "@mui/material/styles/useTheme";
+import useMediaQuery from "@mui/material/useMediaQuery";
 import logo from "@/assets/logo.png";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { logout, selectCurrentUser } from "@/redux/features/auth/authSlice";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 
-const settings = ["Profile", "Account", "Dashboard", "Logout"];
-
-const Header = () => {
+const Navbar = () => {
   const [drawerOpen, setDrawerOpen] = useState(false);
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
   const user = useAppSelector(selectCurrentUser);
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
-  const [isMounted, setIsMounted] = useState(false);
+  const [isLoading, seIsLoading] = useState(true);
   const dispatch = useAppDispatch();
   const router = useRouter();
 
@@ -47,8 +46,10 @@ const Header = () => {
   };
 
   useEffect(() => {
-    setIsMounted(true);
-  }, []);
+    if (user) {
+      seIsLoading(false);
+    }
+  }, [user]);
 
   const toggleDrawer =
     (open: boolean) => (event: React.KeyboardEvent | React.MouseEvent) => {
@@ -83,6 +84,9 @@ const Header = () => {
         </ListItem>
         <ListItem component="a" href="/about" button>
           <ListItemText primary="About Us" />
+        </ListItem>
+        <ListItem component="a" href="/travels" button>
+          <ListItemText primary="Travels" />
         </ListItem>
         <ListItem component="a" href="/login" button>
           <ListItemText primary="Login" />
@@ -171,7 +175,27 @@ const Header = () => {
                   About Us
                 </Button>
               </Link>
-              {isMounted && user ? (
+              {!isLoading && user && (
+                <Link href="/travels" passHref>
+                  <Button
+                    variant="text"
+                    sx={{ color: "#fff", "&:hover": { color: "#ddd" } }}
+                  >
+                    Travels
+                  </Button>
+                </Link>
+              )}
+              {!isLoading && user && user?.role === "ADMIN" && (
+                <Link href="/dashboard" passHref>
+                  <Button
+                    variant="text"
+                    sx={{ color: "#fff", "&:hover": { color: "#ddd" } }}
+                  >
+                    Dashboard
+                  </Button>
+                </Link>
+              )}
+              {!isLoading && user ? (
                 <Box sx={{ flexGrow: 0 }}>
                   <Tooltip title="Open Menu">
                     <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
@@ -191,7 +215,11 @@ const Header = () => {
                     open={Boolean(anchorElUser)}
                     onClose={handleCloseUserMenu}
                   >
-                    <MenuItem onClick={handleCloseUserMenu}>
+                    <MenuItem
+                      component={Link}
+                      href="/profile"
+                      onClick={handleCloseUserMenu}
+                    >
                       <Typography textAlign="center">Profile</Typography>
                     </MenuItem>
                     <MenuItem onClick={handleLogout}>
@@ -217,4 +245,4 @@ const Header = () => {
   );
 };
 
-export default Header;
+export default Navbar;
